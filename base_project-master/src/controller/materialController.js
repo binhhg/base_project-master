@@ -51,7 +51,6 @@ module.exports = (container) => {
         }
       }
       res.status(httpCode.BAD_REQUEST).end()
-
     } catch (e) {
       logger.e(e)
       res.status(httpCode.UNKNOWN_ERROR).send({ ok: false })

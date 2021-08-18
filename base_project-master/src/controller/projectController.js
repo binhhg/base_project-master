@@ -12,6 +12,7 @@ module.exports = (container) => {
   const addProject = async (req, res) => {
     try {
       const body = req.body
+      body.manager = req.user._id
       const {
         error,
         value

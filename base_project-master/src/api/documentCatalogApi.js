@@ -1,10 +1,10 @@
 module.exports = (app, container) => {
   const { serverSettings } = container.resolve('config')
-  const { documentCatalogController } = container.resolve('controller')
+  const { docCataController } = container.resolve('controller')
   const { basePath } = serverSettings
-  app.get(`${basePath}/documentCatalog`, documentCatalogController.getDocCata)
-  app.get(`${basePath}/documentCatalog/:id`, documentCatalogController.getDocCataById)
-  app.put(`${basePath}/documentCatalog/:id`, documentCatalogController.updateDocCata)
-  app.delete(`${basePath}/documentCatalog/:id`, documentCatalogController.deletedDocCata)
-  app.post(`${basePath}/documentCatalog`, documentCatalogController.addDocCata)
+  app.get(`${basePath}/doccata`, docCataController.getDocCata)
+  app.get(`${basePath}/doccata/:id`, docCataController.getDocCataById)
+  app.put(`${basePath}/doccata/:id`, docCataController.updateDocCata)
+  app.delete(`${basePath}/doccata/:id`, docCataController.deletedDocCata)
+  app.post(`${basePath}/doccata`, docCataController.addDocCata)
 }

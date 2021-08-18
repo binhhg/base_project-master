@@ -7,8 +7,8 @@ module.exports = (container) => {
   const addDocCata = async (req, res) => {
     try {
       const body = req.body
-      body.creatBy = req.user._id
-      const { error, value } = await schemaValidator(body, 'DocumentCatalog')
+      body.createdBy = req.user._id
+      const { error, value } = await schemaValidator(body, 'DocCata')
       if (error) {
         return res.status(httpCode.BAD_REQUEST).send({ msg: error.message })
       }
@@ -67,17 +67,17 @@ module.exports = (container) => {
     try {
       const { id } = req.params
       const body = req.body
-      const check = (await docCataRepo.getDocCataById(id)).toObject()
       if (id) {
+        const check = await docCataRepo.getDocCataById(id)
         if (check.deleted === 1) {
           return res.status(httpCode.BAD_REQUEST).end()
         }
       }
-      const { error, value } = await schemaValidator(body, 'DocumentCatalog')
+      const { error, value } = await schemaValidator(body, 'DocCata')
       if (error) {
         return res.status(httpCode.BAD_REQUEST).send({ msg: error.message })
       }
-      if (id && body) {
+      if (body) {
         const data = await docCataRepo.updateDocCata(id, value)
         res.status(httpCode.SUCCESS).send(data)
       } else {

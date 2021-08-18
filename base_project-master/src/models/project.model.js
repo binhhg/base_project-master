@@ -1,11 +1,16 @@
 module.exports = (joi, mongoose, { joi2MongoSchema, schemas }) => {
+  const { ObjectId } = mongoose.Types
   const projectJoi = joi.object({
     name: joi.string().required(),
     manager: joi.string().required(),
     status: joi.number().valid(0, 1).default(0),
     deleted: joi.number().valid(0, 1).default(0)
   })
-  const projectSchema = joi2MongoSchema(projectJoi, {}, {
+  const projectSchema = joi2MongoSchema(projectJoi, {
+    manager: {
+      type: ObjectId
+    }
+  }, {
     createdAt: {
       type: Number,
       default: () => Math.floor(Date.now() / 1000)

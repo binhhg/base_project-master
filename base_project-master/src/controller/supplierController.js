@@ -44,10 +44,10 @@ module.exports = (container) => {
     try {
       const { id } = req.params
       if (id) {
-        const check = supplierRepo.getSupplierById(id)
+        const check = await supplierRepo.getSupplierById(id)
         if (check.deleted === 0) {
           await supplierRepo.deletedSupplier(id)
-          res.status(httpCode.SUCCESS).send({ ok: true })
+          return res.status(httpCode.SUCCESS).send({ ok: true })
         }
       }
       res.status(httpCode.BAD_REQUEST).end()
